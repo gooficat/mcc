@@ -30,6 +30,7 @@ struc_t
 {
    str mnemonic;
    as_arg args[MAX_ARGS];
+   u8 argc;
 }
 as_expr;
 

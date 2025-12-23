@@ -1,2 +1,2 @@
 main:
-    xor %cx, %cx
+    add %cx, $32

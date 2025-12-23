@@ -24,7 +24,7 @@ void as(str path)
       {
          as_expr expr = gen_expr(addr block);
 
-         fancc(RED, "\ninstr: %s", expr.mnemonic);
+         fancc(RED, "\ninstr: %s, args: %hhu", expr.mnemonic, expr.argc);
       }
       else
       {

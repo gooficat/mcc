@@ -12,9 +12,10 @@ int main()
 
    for (u64 i = 0; i != toks.length; ++i)
    {
+      fancc(PURPLE, "\n%c", toks.data[i].type);
       if (toks.data[i].value != NULL)
       {
-         fancc(BLUE, "%s\n", toks.data[i].value);
+         fancc(BLUE, ":\t%s", toks.data[i].value);
       }
    }
 

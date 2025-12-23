@@ -3,9 +3,8 @@
 
 #define TK_MAX 32
 
-enu_m{
-    AS_EOF, AS_REG, AS_KEW, AS_IMM, AS_MEM, AS_ADD, AS_SUB, AS_MUL,
-} as_toktype;
+enu_m{AS_EOF,       AS_REG = '%', AS_KEW,       AS_IMM = '$',
+      AS_ADD = '+', AS_SUB = '-', AS_MUL = '*', AS_COM = ','} as_toktype;
 
 struc_t
 {

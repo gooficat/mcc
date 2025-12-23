@@ -1,0 +1,9 @@
+{
+    "name": "mcc",
+    "version": "1.0.0",
+    "description": "A mcc project using vcpkg for dependency management",
+    "homepage": "",
+    "dependencies": [],
+    "builtin-baseline": "x-custom-baseline",
+    "overrides": []
+}

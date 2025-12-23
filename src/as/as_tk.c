@@ -30,6 +30,7 @@ as_tok_arr as_fetch_tokens(fstream_t ptr fs)
       case '+':
       case '-':
       case '*':
+      case ':':
          tok.type = fs->c;
          has_value = false;
          break;

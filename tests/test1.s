@@ -1,1 +1,2 @@
-%ax, %cx
+main:
+    xor %cx, %cx

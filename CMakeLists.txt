@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
     project(mcc LANGUAGES C)
     
     # Set C standard
-    set(CMAKE_C_STANDARD 23)
+    set(CMAKE_C_STANDARD 17)
     set(CMAKE_C_STANDARD_REQUIRED ON)
     
     # Find vcpkg packages if available
@@ -10,18 +10,10 @@ cmake_minimum_required(VERSION 3.15)
     
     # Include directories
     include_directories(include)
-    include_directories("${CMAKE_SOURCE_DIR}/useful_snippets/c")
     
-    file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/*.c)
-
     # Add executable
     add_executable(mcc 
-        ${SOURCES}
-        
-        useful_snippets/c/defs.c
-        useful_snippets/c/fancc.c
-        useful_snippets/c/file.c
-        useful_snippets/c/str.c
+        src/main.c
     )
     
     # Compiler-specific options

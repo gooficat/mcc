@@ -19,6 +19,10 @@ u8_arr as_encode(as_unencoded_unit ptr exprs)
       vals[1] = 0;
       bool num_vals = 0;
       u16 j;
+
+      // TODO add a check for if it is one of the "special instructions" which will be used for
+      // things like jmp, call. these will probably need a special check
+
       for (j = 0; j != num_mnems; ++j)
       {
          if (not strcmp(exprs->exprs.data[i].mnemonic, mnems[j].name))
@@ -48,6 +52,12 @@ u8_arr as_encode(as_unencoded_unit ptr exprs)
             opcode += exprs->exprs.data[i].args[0].base;  // add the register to the opcode
             break;
          case AS_ARG_MEM:
+            if (exprs->exprs.data[i].args[0].disp != 0)
+            {
+               vals[num_vals++] = exprs->exprs.data[i].args[0].disp;
+               // for now we assume 16 bits TODO
+               has_modrm = true;
+            }
             break;
          }
          break;

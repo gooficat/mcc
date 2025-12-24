@@ -7,6 +7,7 @@ const u8 num_regs = sizeof(regs) / sizeof(regs[0]);
 
 const mnem mnems[] = {
     {"add", 0x00},
+    {"pop", 0x58},
     {"mov", 0x88},
     {"ret", 0xC3},
 };

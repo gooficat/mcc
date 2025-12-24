@@ -18,25 +18,12 @@ u8_arr as_encode(as_unencoded_unit ptr exprs)
       vals[0] = 0;
       vals[1] = 0;
       bool num_vals = 0;
-      u16 j;
 
-      // TODO add a check for if it is one of the "special instructions" which will be used for
-      // things like jmp, call. these will probably need a special check
+      const mnem ptr mnem = find_expr_mnem(addr exprs->exprs.data[i]);
 
-      for (j = 0; j != num_mnems; ++j)
-      {
-         if (not strcmp(exprs->exprs.data[i].mnemonic, mnems[j].name))
-         {
-            opcode = mnems[j].code;
-            break;
-         }
-      }
-      if (j == num_mnems)  // first runtime error check of the program (^･o･^)ﾉ”
-      {
-         fancc(RED, "Error! Instruction was not found found for mnemonic %s!\n",
-               exprs->exprs.data[i].mnemonic);
-         exit(EXIT_FAILURE);
-      }
+      fancc(RED | BLUE, "Mnemonic: %s\n", mnem->name);
+
+      opcode = mnem->code;
 
       switch (exprs->exprs.data[i].argc)
       {
@@ -81,6 +68,56 @@ u8_arr as_encode(as_unencoded_unit ptr exprs)
          out.data[ecbo++] = vals[i] & 0xFF;
          out.data[ecbo++] = (vals[i] >> 8) & 0xFF;
       }
+   }
+
+   return out;
+}
+
+bool mnem_match_expr(as_expr ptr expr, const mnem ptr mnem)
+{
+   if (not strcmp(expr->mnemonic, mnem->name))  // if the names don't match
+      return false;
+
+   u8 i;
+   for (i = 0; i notis MAX_ARGS and mnem->spec[i].type; ++i)
+   {
+      switch (expr->args[i].type)
+      {
+      case AS_ARG_IMM:
+         if (mnem->spec[i].type notis imm and mnem->spec[i].type notis rm)
+            return false;
+         if (expr->args[i].size > mnem->spec[i].size)
+            return false;
+         break;
+
+      case AS_ARG_REG:
+         if (mnem->spec[i].type notis reg and mnem->spec[i].type notis rm)
+            return false;
+         if (expr->args[i].size > mnem->spec[i].size)
+            return false;
+
+         break;
+      case AS_ARG_MEM:
+         return false;  // TODO
+         break;
+      default:
+      }
+   }
+   if (i < expr->argc)
+      return false;
+
+   return true;
+}
+
+const mnem ptr find_expr_mnem(as_expr ptr expr)
+{
+   const mnem ptr out = NULL;
+   for (u64 j = 0; j != num_mnems; ++j)
+   {
+      if (not mnem_match_expr(expr, addr mnems[j]))
+         continue;
+
+      out = addr mnems[j];
    }
 
    return out;

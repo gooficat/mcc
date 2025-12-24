@@ -1,3 +1,3 @@
 main:
-    add %cx, $32
+    pop %cx
     ret

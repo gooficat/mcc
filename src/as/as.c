@@ -47,13 +47,13 @@ void as(str path)
                unencoded.exprs.data[i].args[j].disp, unencoded.exprs.data[i].args[j].index);
       }
    }
-   printf("\n\n");
+   fancc(RED | GREEN, "\noutput bytes:\n");
 
    u8_arr bytes = as_encode(addr unencoded);
 
    for (u64 i = 0; i != bytes.length; ++i)
    {
-      fancc(BLUE, "%02hhx\t", bytes.data[i]);
+      fancc(BLUE, "\t%02hhx", bytes.data[i]);
    }
 
    fsclose(fs);
